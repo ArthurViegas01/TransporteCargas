@@ -7,7 +7,7 @@ const DataGrid = ({ csv }) => {
     }
 
     return(
-        <table class="table table-sm table-bordered table-hover table-responsive text-center">
+        <table className="table table-sm table-bordered table-hover table-responsive text-center">
             <thead className="bg-primary text-light">
                 <tr >
                     {csv.header.map((headerName) => (
@@ -16,10 +16,10 @@ const DataGrid = ({ csv }) => {
                 </tr>
             </thead>
             <tbody>
-                {csv.data.map((row, index) => (
-                    <tr key={index}>
-                        {row.map((col) => (
-                            <td key={col}>{col}</td>
+                {csv.data.map((row, rowIndex) => (
+                    <tr key={rowIndex}>
+                        {row.map((col, colIndex) => (
+                            <td key={colIndex}>{col}</td>
                         ))}
                     </tr>
                 ))}
