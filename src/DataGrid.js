@@ -1,5 +1,5 @@
 import React from "react";
-import "./DataGrid.css"
+import "./App.css"
 
 const DataGrid = ({ csv }) => {
     if(!csv){

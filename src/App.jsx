@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { testeErro, Trajeto, vamoVe } from "./Sistema.js";
+import { Tabela, procuraTrecho } from "./Sistema.js";
 import logo from "./delllogo.png";
 import DataGrid from "./DataGrid";
 import "./App.css";
 
-const parseCSV = (text) => {
+const parseCSV = (text, setTabela) => {
   const result = {
     header: [],
     data: [],
@@ -19,12 +19,17 @@ const parseCSV = (text) => {
     result.data.push(item.split(";"));
   });
 
-  console.log(result);
+  let tabela = new Tabela(result.header, result.data);
+  setTabela(tabela);
+
+  //console.log(result.header.indexOf("BRASILIA"));
+
   return result;
 };
 
 function App() {
   const [arquivoCSV, setCSV] = useState(null);
+  const [tabela, setTabela] = useState(null);
 
   //Carrega o arquivo ao carregar a página
   useEffect(() => {
@@ -32,15 +37,15 @@ function App() {
       .then((r) => r.text())
       .then((text) => {
         //Chama a função manipuladora de csv para quebrar arquivo em arrays
-        setCSV(parseCSV(text));
+        setCSV(parseCSV(text, setTabela));
       });
-}, []);
+  }, []);
 
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary mb-3">
         <div className="container">
-          <a className="navbar-brand" href="#">
+          <a className="navbar-brand" href="App.js">
             <img src={logo} width="70" height="40" alt=""></img>
           </a>
           <button
@@ -74,7 +79,82 @@ function App() {
           </div>
         </div>
 
+        <div className="row">
+          <div className="col">
+            <h2 className="display-5">Tabelas</h2>
+          </div>
+        </div>
+
+        <h5>Distância entre cidades</h5>
         <DataGrid csv={arquivoCSV} />
+
+        {/* Tabela de pesos dos itens | custo x kilometro */}
+        <div className="row">
+          <div className="col mb-3">
+            <h5>Pesos dos itens</h5>
+            <table className="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Itens</th>
+                  <th>Peso(kg)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Celular</td>
+                  <td>0,5</td>
+                </tr>
+                <tr>
+                  <td>Geladeira</td>
+                  <td>60</td>
+                </tr>
+                <tr>
+                  <td>Freezer</td>
+                  <td>100</td>
+                </tr>
+                <tr>
+                  <td>Cadeira</td>
+                  <td>5</td>
+                </tr>
+                <tr>
+                  <td>Luminária</td>
+                  <td>0,8</td>
+                </tr>
+                <tr>
+                  <td>Lavadora de roupas</td>
+                  <td>120</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div className="col mb-3">
+            <h5>Relação custo x kilometro</h5>
+            <table className="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Itens</th>
+                  <th>Preço por KM (R$/km)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Caminhão de pequeno porte</td>
+                  <td>4.87</td>
+                </tr>
+                <tr>
+                  <td>Caminhão de médio porte</td>
+                  <td>11.92</td>
+                </tr>
+                <tr>
+                  <td>Caminhão de grande porte</td>
+                  <td>27.44</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
 
         <div className="row">
           <div className="col mb-3">
@@ -102,17 +182,17 @@ function App() {
           </div>
 
           <div className="col-md-4">
-            <select className="form-control" id="ano">
-              <option value="pequenop">Pequeno porte</option>
-              <option value="mediop">Médio porte</option>
-              <option value="grandep">Grande porte</option>
+            <select className="form-control" id="tipoCaminhao">
+              <option value="4.87">Pequeno porte</option>
+              <option value="11.92">Médio porte</option>
+              <option value="27.44">Grande porte</option>
             </select>
           </div>
         </div>
 
         <div className="row mb-4">
           <div className="col-md-4">
-            <button type="button" className="btn btn-primary">
+            <button type="button" className="btn btn-primary" onClick={() => procuraTrecho(document.getElementById('cidade1').value, document.getElementById('cidade2').value, document.getElementById('tipoCaminhao').value, tabela)}>
               Consultar trecho
             </button>
           </div>
