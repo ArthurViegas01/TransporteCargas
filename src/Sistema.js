@@ -118,13 +118,13 @@ export function procuraTrecho(tabela){
         //tipoCaminhao.value = ''
 
     } else {
-        //document.getElementById('modalTitulo').innerHTML = 'TUDO ERRADO';
-        //document.getElementById('modalHeader').className = 'modal-header text-danger';
-        //document.getElementById('modalBody').innerHTML = 'Errou e não foi pouco';
-        //document.getElementById('modalButton').className = 'btn btn-danger';
-        alert('ERRO GROTESCO')
+        document.getElementById('modalTitulo').innerHTML = 'TUDO ERRADO';
+        document.getElementById('modalHeader').className = 'modal-header text-danger';
+        document.getElementById('modalBody').innerHTML = 'Errou e não foi pouco';
+        document.getElementById('modalButton').className = 'btn btn-danger';
+        //alert('ERRO GROTESCO')
 
-        $('#modalRegistro').modal('show');
+        $('#modalRegistro').modal("show");
     }
 }
 
