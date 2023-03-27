@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Tabela, procuraTrecho } from "./Sistema.js";
+import { Tabela, procuraTrecho, cadastraTransporte } from "./Sistema.js";
 import logo from "./delllogo.png";
-import DataGrid from "./DataGrid";
+import DataGrid from "./components/DataGrid";
+import Tables from "./components/Tables";
 import "./App.css";
 
 const parseCSV = (text, setTabela) => {
@@ -70,18 +71,6 @@ function App() {
         </div>
       </nav>
 
-
-
-
-
-      
-
-
-
-
-
-
-
       <div className="container">
         <div className="row">
           <div className="col mb-3">
@@ -99,71 +88,7 @@ function App() {
         <DataGrid csv={arquivoCSV} />
 
         {/* Tabela de pesos dos itens | custo x kilometro */}
-        <div className="row">
-          <div className="col mb-3">
-            <h5>Pesos dos itens</h5>
-            <table className="table table-bordered">
-              <thead>
-                <tr>
-                  <th>Itens</th>
-                  <th>Peso(kg)</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Celular</td>
-                  <td>0,5</td>
-                </tr>
-                <tr>
-                  <td>Geladeira</td>
-                  <td>60</td>
-                </tr>
-                <tr>
-                  <td>Freezer</td>
-                  <td>100</td>
-                </tr>
-                <tr>
-                  <td>Cadeira</td>
-                  <td>5</td>
-                </tr>
-                <tr>
-                  <td>Luminária</td>
-                  <td>0,8</td>
-                </tr>
-                <tr>
-                  <td>Lavadora de roupas</td>
-                  <td>120</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div className="col mb-3">
-            <h5>Relação custo x kilometro</h5>
-            <table className="table table-bordered">
-              <thead>
-                <tr>
-                  <th>Itens</th>
-                  <th>Preço por KM (R$/km)</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Caminhão de pequeno porte</td>
-                  <td>4.87</td>
-                </tr>
-                <tr>
-                  <td>Caminhão de médio porte</td>
-                  <td>11.92</td>
-                </tr>
-                <tr>
-                  <td>Caminhão de grande porte</td>
-                  <td>27.44</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+        <Tables/>
 
         <div className="row">
           <div className="col mb-3">
@@ -218,6 +143,7 @@ function App() {
           </div>
         </div>
 
+        {/* Cadastrar Transporte */}
         <div className="row">
           <div className="col mb-3">
             <h2 className="display-5">Cadastrar transporte</h2>
@@ -242,7 +168,7 @@ function App() {
                     <input
                       type="text"
                       className="form-control ocupando"
-                      id="pesoCelular"
+                      id="qtdCelular"
                       pattern="[0-9]*"
                     />
                   </td>
@@ -253,7 +179,7 @@ function App() {
                     <input
                       type="text"
                       className="form-control ocupando"
-                      id="pesoGeladeira"
+                      id="qtdGeladeira"
                     />
                   </td>
                 </tr>
@@ -263,7 +189,7 @@ function App() {
                     <input
                       type="text"
                       className="form-control ocupando"
-                      id="pesoFreezer"
+                      id="qtdFreezer"
                     />
                   </td>
                 </tr>
@@ -273,7 +199,7 @@ function App() {
                     <input
                       type="text"
                       className="form-control ocupando"
-                      id="pesoCadeira"
+                      id="qtdCadeira"
                     />
                   </td>
                 </tr>
@@ -283,7 +209,7 @@ function App() {
                     <input
                       type="text"
                       className="form-control ocupando"
-                      id="pesoLuminaria"
+                      id="qtdLuminaria"
                     />
                   </td>
                 </tr>
@@ -293,7 +219,7 @@ function App() {
                     <input
                       type="text"
                       className="form-control ocupando"
-                      id="pesoLavadora"
+                      id="qtdLavadora"
                     />
                   </td>
                 </tr>
@@ -324,7 +250,25 @@ function App() {
             />
 
             <div>
-              <button type="button" className="mt-5 btn btn-dark">Fazer entrega</button>
+              <button type="button" className="mt-5 btn btn-dark" onClick={() =>
+                cadastraTransporte(
+                  document.getElementById("qtdCelular").value,
+                  document.getElementById("qtdGeladeira").value,
+                  document.getElementById("qtdFreezer").value,
+                  document.getElementById("qtdCadeira").value,
+                  document.getElementById("qtdLuminaria").value,
+                  document.getElementById("qtdLavadora").value,
+                  document.getElementById("parada1").value,
+                  document.getElementById("parada2").value,
+                  document.getElementById("parada3").value,
+                  document.getElementById("descarregarCelular").value,
+                  document.getElementById("descarregarGeladeira").value,
+                  document.getElementById("descarregarFreezer").value,
+                  document.getElementById("descarregarCadeira").value,
+                  document.getElementById("descarregarLuminaria").value,
+                  document.getElementById("descarregarLavadora").value,
+                )
+              }>Fazer entrega</button>
             </div>
           </div>
 
@@ -345,7 +289,7 @@ function App() {
                     <input
                       type="text"
                       className="form-control ocupando"
-                      id="pesoCelular"
+                      id="descarregarCelular"
                       pattern="[0-9]*"
                     />
                   </td>
@@ -356,7 +300,7 @@ function App() {
                     <input
                       type="text"
                       className="form-control ocupando"
-                      id="pesoGeladeira"
+                      id="descarregarGeladeira"
                     />
                   </td>
                 </tr>
@@ -366,7 +310,7 @@ function App() {
                     <input
                       type="text"
                       className="form-control ocupando"
-                      id="pesoFreezer"
+                      id="descarregarFreezer"
                     />
                   </td>
                 </tr>
@@ -376,7 +320,7 @@ function App() {
                     <input
                       type="text"
                       className="form-control ocupando"
-                      id="pesoCadeira"
+                      id="descarregarCadeira"
                     />
                   </td>
                 </tr>
@@ -386,7 +330,7 @@ function App() {
                     <input
                       type="text"
                       className="form-control ocupando"
-                      id="pesoLuminaria"
+                      id="descarregarLuminaria"
                     />
                   </td>
                 </tr>
@@ -396,7 +340,7 @@ function App() {
                     <input
                       type="text"
                       className="form-control ocupando"
-                      id="pesoLavadora"
+                      id="descarregarLavadora"
                     />
                   </td>
                 </tr>
@@ -429,14 +373,18 @@ function App() {
         </div>
 
         <div className="row">
-          <div className="col-md-4">
+          <div className="col-md-4 mb-5">
             <button type="button" className="btn btn-danger">
               Limpar histórico
             </button>
           </div>
         </div>
+
       </div>
+      {/* Div container */}
+
     </div>
+    // Div Principal
   );
 }
 
