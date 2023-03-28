@@ -2,10 +2,30 @@
   text-align: center;
 }
 
-.testeSla{
-  width: 100% !important;
-  height: auto;
+html, body {
+  width: 100%;
   margin: 0;
+  padding: 0;
+}
+
+.divTesteNave{
+  display: inline-block;
+  width: 100% !important;
+  height: auto !important;
+  margin-bottom: 10px;
+}
+
+.divTesteNave img{
+  width: 100%;
+  object-fit: contain;
+  object-position: center;
+  
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+
+.imagemCem{
+  width: 100%;
 }
 
 .minhaDiv{

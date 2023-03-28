@@ -3,9 +3,9 @@ import { Tabela, procuraTrecho, cadastraTransporte } from "./Sistema.js";
 import logo from "./delllogo.png";
 import DataGrid from "./components/DataGrid";
 import Tables from "./components/Tables";
-import Caminhao1 from './assets/caminhao1.jpg';
-import Caminhao2 from './assets/caminhao2.png';
-import Caminhao3 from './assets/caminhao3.jpg';
+import Caminhao1 from "./assets/caminhao1.png";
+import Caminhao2 from "./assets/caminhao2.png";
+import Caminhao3 from "./assets/caminhao3.png";
 
 import "./App.css";
 import "./carousel.css";
@@ -76,49 +76,61 @@ function App() {
         </div>
       </nav>
 
-
-      <div className="d-flex justify-content-center testeSla">
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-          <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-          </ol>
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img src={Caminhao1} class="d-block w-100" className="d-flex" alt="..."></img>
-              <div class="container">
-                <div class="carousel-caption text-left">
-                  <h1>Example headline.</h1>
-                  <p>Some representative placeholder content for the first slide of the carousel.</p>
-                  <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p>
+      <div className="divTesteNave">
+        <div className="justify-content-center">
+          <div id="carouselExampleIndicators" className="carousel slide" data-ride="false" data-interval="false">
+            <ol className="carousel-indicators">
+              <li data-target="#carouselExampleIndicators" data-slide-to="0" className="active"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div className="carousel-inner">
+              <div className="carousel-item active">
+                <img src={Caminhao3} className="" alt="..."></img>
+                <div className="container">
+                  <div className="carousel-caption text-left">
+                    <h1>Dely.</h1>
+                    <p>A transportadora que você pode confiar.</p>
+                  </div>
+                </div>
+              </div>
+              <div className="carousel-item">
+                <img src={Caminhao2} className="" alt="..."></img>
+                <div className="container">
+                  <div className="carousel-caption text-start">
+                    <h1>Alcance</h1>
+                    <p>Serviços de entrega com disponibilidade para todos os estados do Brasil</p>
+                  </div>
+                </div>
+              </div>
+              <div className="carousel-item">
+                <img src={Caminhao1} className="" alt="..."></img>
+                <div className="">
+                  <div className="carousel-caption text-right">
+                    <h1>Inclusão</h1>
+                    <p>Website com design feito com design responsivo para você acessar de qualquer lugar</p>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="carousel-item">
-              <img src={Caminhao2} class="d-block w-100" className="d-flex" alt="..."></img>
-            </div>
-            <div class="carousel-item">
-              <img src={Caminhao3} class="d-block w-100" className="d-flex" alt="..."></img>
-            </div>
+            <button className="carousel-control-prev" type="button" data-target="#carouselExampleIndicators" data-slide="prev">
+              <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span className="sr-only">Anterior</span>
+            </button>
+            <button className="carousel-control-next" type="button" data-target="#carouselExampleIndicators" data-slide="next">
+              <span className="carousel-control-next-icon" aria-hidden="true"></span>
+              <span className="sr-only">Próximo</span>
+            </button>
           </div>
-          <button class="carousel-control-prev" type="button" data-target="#carouselExampleIndicators" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-target="#carouselExampleIndicators" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </button>
-        </div></div>
+        </div>
+      </div>
 
       <div className="container">
-
-
-
         <div className="row">
           <div className="col mb-3">
-            <h1 className="display-4 titulo">Sistema de transporte de cargas</h1>
+            <h1 className="display-4 titulo">
+              Sistema de transporte de cargas
+            </h1>
           </div>
         </div>
 
@@ -137,26 +149,17 @@ function App() {
         <div className="row">
           <div className="col mb-3">
             <h2 className="display-5">Consultar trecho x modalidade</h2>
+            <p>Por favor digitar sem utilizar acentos</p>
           </div>
         </div>
 
         <div className="row mb-4">
           <div className="col-md-4">
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Cidade 1"
-              id="cidade1"
-            />
+            <input type="text" className="form-control" placeholder="Cidade 1" id="cidade1"/>
           </div>
 
           <div className="col-md-4">
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Cidade 2"
-              id="cidade2"
-            />
+            <input type="text" className="form-control" placeholder="Cidade 2" id="cidade2"/>
           </div>
 
           <div className="col-md-4">
@@ -170,10 +173,7 @@ function App() {
 
         <div className="row mb-4">
           <div className="col-md-4">
-            <button
-              type="button"
-              className="btn btn-primary"
-              onClick={() =>
+            <button type="button" className="btn btn-primary" onClick={() =>
                 procuraTrecho(
                   document.getElementById("cidade1").value,
                   document.getElementById("cidade2").value,
@@ -181,9 +181,7 @@ function App() {
                   tabela
                 )
               }
-            >
-              Consultar trecho
-            </button>
+            > Consultar trecho</button>
           </div>
         </div>
 
@@ -197,7 +195,7 @@ function App() {
         <div className="row">
           {/* Itens iniciais */}
           <div className="col mb-3">
-            <h6>Itens iniciais</h6>
+            <h6>Itens a serem transportados</h6>
             <table className="table table-bordered">
               <thead>
                 <tr>
@@ -274,45 +272,37 @@ function App() {
           {/* Trajeto da entrega */}
           <div className="col mt-4">
             <div className="mt-6"></div>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Partida"
-              id="parada1"
-            />
-            <input
-              type="text"
-              className="form-control mt-5 mb-5"
-              placeholder="Parada"
-              id="parada2"
-            />
-            <input
-              type="text"
-              className="form-control mt-5"
-              placeholder="Destino"
-              id="parada3"
-            />
+            <input type="text" className="form-control" placeholder="Partida" id="parada1"/>
+            <input type="text" className="form-control mt-5 mb-5" placeholder="Parada" id="parada2"/>
+            <input type="text" className="form-control mt-5" placeholder="Destino" id="parada3"/>
 
             <div>
-              <button type="button" className="mt-5 btn btn-dark" onClick={() =>
-                cadastraTransporte(
-                  document.getElementById("qtdCelular").value,
-                  document.getElementById("qtdGeladeira").value,
-                  document.getElementById("qtdFreezer").value,
-                  document.getElementById("qtdCadeira").value,
-                  document.getElementById("qtdLuminaria").value,
-                  document.getElementById("qtdLavadora").value,
-                  document.getElementById("parada1").value,
-                  document.getElementById("parada2").value,
-                  document.getElementById("parada3").value,
-                  document.getElementById("descarregarCelular").value,
-                  document.getElementById("descarregarGeladeira").value,
-                  document.getElementById("descarregarFreezer").value,
-                  document.getElementById("descarregarCadeira").value,
-                  document.getElementById("descarregarLuminaria").value,
-                  document.getElementById("descarregarLavadora").value,
-                )
-              }>Fazer entrega</button>
+              <button
+                type="button"
+                className="mt-5 btn btn-dark"
+                onClick={() =>
+                  cadastraTransporte(
+                    document.getElementById("qtdCelular").value,
+                    document.getElementById("qtdGeladeira").value,
+                    document.getElementById("qtdFreezer").value,
+                    document.getElementById("qtdCadeira").value,
+                    document.getElementById("qtdLuminaria").value,
+                    document.getElementById("qtdLavadora").value,
+                    document.getElementById("parada1").value,
+                    document.getElementById("parada2").value,
+                    document.getElementById("parada3").value,
+                    document.getElementById("descarregarCelular").value,
+                    document.getElementById("descarregarGeladeira").value,
+                    document.getElementById("descarregarFreezer").value,
+                    document.getElementById("descarregarCadeira").value,
+                    document.getElementById("descarregarLuminaria").value,
+                    document.getElementById("descarregarLavadora").value,
+                    tabela
+                  )
+                }
+              >
+                Fazer entrega
+              </button>
             </div>
           </div>
 
@@ -330,62 +320,37 @@ function App() {
                 <tr>
                   <td>Celular</td>
                   <td>
-                    <input
-                      type="text"
-                      className="form-control ocupando"
-                      id="descarregarCelular"
-                      pattern="[0-9]*"
-                    />
+                    <input type="text" className="form-control ocupando" id="descarregarCelular"/>
                   </td>
                 </tr>
                 <tr>
                   <td>Geladeira</td>
                   <td>
-                    <input
-                      type="text"
-                      className="form-control ocupando"
-                      id="descarregarGeladeira"
-                    />
+                    <input type="text" className="form-control ocupando" id="descarregarGeladeira"/>
                   </td>
                 </tr>
                 <tr>
                   <td>Freezer</td>
                   <td>
-                    <input
-                      type="text"
-                      className="form-control ocupando"
-                      id="descarregarFreezer"
-                    />
+                    <input type="text" className="form-control ocupando" id="descarregarFreezer"/>
                   </td>
                 </tr>
                 <tr>
                   <td>Cadeira</td>
                   <td>
-                    <input
-                      type="text"
-                      className="form-control ocupando"
-                      id="descarregarCadeira"
-                    />
+                    <input type="text" className="form-control ocupando" id="descarregarCadeira"/>
                   </td>
                 </tr>
                 <tr>
                   <td>Luminária</td>
                   <td>
-                    <input
-                      type="text"
-                      className="form-control ocupando"
-                      id="descarregarLuminaria"
-                    />
+                    <input type="text" className="form-control ocupando" id="descarregarLuminaria"/>
                   </td>
                 </tr>
                 <tr>
                   <td>Lavadora de roupas</td>
                   <td>
-                    <input
-                      type="text"
-                      className="form-control ocupando"
-                      id="descarregarLavadora"
-                    />
+                    <input type="text" className="form-control ocupando" id="descarregarLavadora"/>
                   </td>
                 </tr>
               </tbody>
@@ -423,31 +388,42 @@ function App() {
             </button>
           </div>
         </div>
-
       </div>
       {/* Div container */}
 
-      <div class="modal fade" id="modalRegistro" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-
+      {/* Div Modal */}
+      <div
+        className="modal fade"
+        id="modalRegistro"
+        tabIndex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog" role="document">
+          <div className="modal-content">
             <div id="modalHeader">
-              <h5 class="modal-title" id="modalTitulo"></h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <h5 className="modal-title" id="modalTitulo"></h5>
+              <button
+                type="button"
+                className="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
 
-            <div class="modal-body" id="modalBody">
-            </div>
+            <div className="modal-body" id="modalBody"></div>
 
-            <div class="modal-footer">
-              <button type="button" id="modalButton" data-dismiss="modal">Voltar</button>
+            <div className="modal-footer">
+              <button type="button" id="modalButton" data-dismiss="modal">
+                Voltar
+              </button>
             </div>
           </div>
         </div>
       </div>
-
     </div>
     // Div Principal
   );
