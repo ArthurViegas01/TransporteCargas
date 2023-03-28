@@ -3,7 +3,12 @@ import { Tabela, procuraTrecho, cadastraTransporte } from "./Sistema.js";
 import logo from "./delllogo.png";
 import DataGrid from "./components/DataGrid";
 import Tables from "./components/Tables";
+import Caminhao1 from './assets/caminhao1.jpg';
+import Caminhao2 from './assets/caminhao2.png';
+import Caminhao3 from './assets/caminhao3.jpg';
+
 import "./App.css";
+import "./carousel.css";
 
 const parseCSV = (text, setTabela) => {
   const result = {
@@ -42,7 +47,7 @@ function App() {
 
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-primary mb-3">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
         <div className="container">
           <a className="navbar-brand" href="App.js">
             <img src={logo} width="70" height="40" alt=""></img>
@@ -71,7 +76,46 @@ function App() {
         </div>
       </nav>
 
+
+      <div className="d-flex justify-content-center testeSla">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+          </ol>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src={Caminhao1} class="d-block w-100" className="d-flex" alt="..."></img>
+              <div class="container">
+                <div class="carousel-caption text-left">
+                  <h1>Example headline.</h1>
+                  <p>Some representative placeholder content for the first slide of the carousel.</p>
+                  <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src={Caminhao2} class="d-block w-100" className="d-flex" alt="..."></img>
+            </div>
+            <div class="carousel-item">
+              <img src={Caminhao3} class="d-block w-100" className="d-flex" alt="..."></img>
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-target="#carouselExampleIndicators" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-target="#carouselExampleIndicators" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </button>
+        </div></div>
+
       <div className="container">
+
+
+
         <div className="row">
           <div className="col mb-3">
             <h1 className="display-4 titulo">Sistema de transporte de cargas</h1>
@@ -88,7 +132,7 @@ function App() {
         <DataGrid csv={arquivoCSV} />
 
         {/* Tabela de pesos dos itens | custo x kilometro */}
-        <Tables/>
+        <Tables />
 
         <div className="row">
           <div className="col mb-3">
@@ -384,25 +428,25 @@ function App() {
       {/* Div container */}
 
       <div class="modal fade" id="modalRegistro" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
 
-          <div id="modalHeader">
-            <h5 class="modal-title" id="modalTitulo"></h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
+            <div id="modalHeader">
+              <h5 class="modal-title" id="modalTitulo"></h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
 
-          <div class="modal-body" id="modalBody">
-          </div>
+            <div class="modal-body" id="modalBody">
+            </div>
 
-          <div class="modal-footer">
-            <button type="button" id="modalButton" data-dismiss="modal">Voltar</button>
+            <div class="modal-footer">
+              <button type="button" id="modalButton" data-dismiss="modal">Voltar</button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
     </div>
     // Div Principal

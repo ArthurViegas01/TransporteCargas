@@ -105,13 +105,14 @@ export function procuraTrecho(tabela){
         precoViajem = precoViajem.toFixed(2) 
 
 
-        //document.getElementById('modalTitulo').innerHTML = 'TUDO CERTO';
-        //document.getElementById('modalHeader').className = 'modal-header text-success';
-        //document.getElementById('modalBody').innerHTML = 'Despesa cadastrada com sucesso';
-        //document.getElementById('modalButton').className = 'btn btn-success';
+        document.getElementById('modalTitulo').innerHTML = 'TUDO CERTO';
+        document.getElementById('modalHeader').className = 'modal-header text-success';
+        //document.getElementById('modalBody').innerHTML = "O preço da viajem de " + cidade1.value + " para " + cidade2.value + " é de: R$" + precoViajem;
+        document.getElementById('modalBody').innerHTML = `O preço da viajem de ${cidade1.value} para ${cidade2.value} é de: R$ ${precoViajem}`;
+        document.getElementById('modalButton').className = 'btn btn-success';
 
         //$('#modalRegistro').modal('show')
-        alert("O preço da viajem de " + cidade1.value + " para " + cidade2.value + " é de: R$" + precoViajem)
+        //alert("O preço da viajem de " + cidade1.value + " para " + cidade2.value + " é de: R$" + precoViajem)
 
         //cidade1.value = ''
         //cidade2.value = ''
@@ -122,7 +123,6 @@ export function procuraTrecho(tabela){
         document.getElementById('modalHeader').className = 'modal-header text-danger';
         document.getElementById('modalBody').innerHTML = 'Errou e não foi pouco';
         document.getElementById('modalButton').className = 'btn btn-danger';
-        //alert('ERRO GROTESCO')
 
         $('#modalRegistro').modal("show");
     }
