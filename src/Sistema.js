@@ -41,13 +41,6 @@ export class BancoDados {
     return transportes;
   }
 
-  pesquisar(transporte) {
-    let transportesFiltrados = [];
-    transportesFiltrados = this.recuperarTodosRegistros();
-
-    return transportesFiltrados;
-  }
-
   remover(id) {
     localStorage.removeItem(id);
   }
@@ -105,8 +98,6 @@ export class Transporte {
     this.caminhaoMed = 0;
     this.caminhaoGra = 0;
 
-    
-
     this.pesoInicial =
       this.PesoDeCelular +
       this.PesoDeGeladeira +
@@ -159,6 +150,12 @@ export class Transporte {
       <br>O custo total da viajem foi de: R$${this.custoTotal}
       <br>  Ao total foram ${this.numeroItensDeslocados} itens deslocados por ${this.numeroVeiculosDeslocados} caminhões`;
     };
+
+    //this.custoMedioPorKm = (Number(this.custoTotal))/
+
+      //Custo médio por km
+      //Custo médio por tipo de produto
+      //Custo total para cada modalidade de transporte
   }
 
   calculaCaminhoes(pesoAtual) {
@@ -190,10 +187,6 @@ export class Transporte {
     }
     return true;
   }
-
-  //Custo médio por km
-  //Custo médio por tipo de produto
-  //Custo total para cada modalidade de transporte
 }
 
 //Função para procurar o preço de uma cidade para outra
@@ -201,6 +194,20 @@ export function procuraTrecho(x, y, z, tabela) {
   let cidade1 = document.getElementById("cidade1");
   let cidade2 = document.getElementById("cidade2");
   let tipoCaminhao = document.getElementById("tipoCaminhao");
+  let tipoCaminhaoEx;
+
+  switch(tipoCaminhao.value){
+    case "4.87":
+      tipoCaminhaoEx = "caminhão de pequeno porte";
+      break;
+    case "11.92":
+      tipoCaminhaoEx = "caminhão de médio porte";
+      break;
+    case "27.44":
+      tipoCaminhaoEx = "caminhão de grande porte";
+      break;
+    default:
+  }
 
   //Como as cidades no .csv estão em caixa alta, usamos o toUpperCase para igualar os valores
   cidade1.value = cidade1.value.toUpperCase();
@@ -225,25 +232,19 @@ export function procuraTrecho(x, y, z, tabela) {
     precoViajem = precoViajem.toFixed(2);
 
     //Elementos da modal de sucesso
-    document.getElementById("modalTitulo").innerHTML =
-      "Preço do trecho desejado";
-    document.getElementById("modalHeader").className =
-      "modal-header text-success";
-    document.getElementById("modalBody").innerHTML = `O preço da viajem de ${
-      cidade1.value
-    } para ${cidade2.value} é de: <br>R$${precoViajem.toLocaleString("pt-BR")}`;
+    document.getElementById("modalTitulo").innerHTML = "Preço do trecho desejado";
+    document.getElementById("modalHeader").className = "modal-header text-success";
+    document.getElementById("modalBody").innerHTML = `O preço da viajem de ${cidade1.value
+    } para ${cidade2.value} utilizando um ${tipoCaminhaoEx} é de: <br>R$${precoViajem.toLocaleString("pt-BR")}`;
     document.getElementById("modalButton").className = "btn btn-success";
 
     //Uso do jquery para exibir a modal oculta do app.jsx
     $("#modalRegistro").modal("show");
   } else {
     //Caso haja algum erro exibe a modal de erro
-    document.getElementById("modalTitulo").innerHTML =
-      "Erro: cidade inválida ou com acento";
-    document.getElementById("modalHeader").className =
-      "modal-header text-danger";
-    document.getElementById("modalBody").innerHTML =
-      "A cidade digitada não está presente na lista, ou foi digitada com acento.";
+    document.getElementById("modalTitulo").innerHTML = "Erro: cidade inválida ou com acento";
+    document.getElementById("modalHeader").className = "modal-header text-danger";
+    document.getElementById("modalBody").innerHTML = "A cidade digitada ou não está presente na lista, ou foi digitada incorretamente.";
     document.getElementById("modalButton").className = "btn btn-danger";
 
     $("#modalRegistro").modal("show");
@@ -267,8 +268,7 @@ export function cadastraTransporte(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, 
   let descarregarLuminaria = document.getElementById("descarregarLuminaria").value;
   let descarregarLavadora = document.getElementById("descarregarLavadora").value;
 
-  //Soma o peso de todas as cargas
-  //let somaPeso = (Number(qtdCelular)*0.5) + (Number(qtdGeladeira) * 60) + (Number(qtdFreezer) * 100) + (Number(qtdCadeira) * 5) + (Number(qtdLuminaria) * 0.8) + (Number(qtdLavadora) * 120);
+
 
   //Eleva as paradas do transporte para caixa alta
   parada1 = parada1.toUpperCase();
@@ -304,60 +304,71 @@ export function cadastraTransporte(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, 
     precoSegundaViajem
   );
 
-  if (
-    qtdCelular - descarregarCelular < 0 ||
+  if (qtdCelular - descarregarCelular < 0 ||
     qtdGeladeira - descarregarGeladeira < 0 ||
     qtdFreezer - descarregarFreezer < 0 ||
     qtdCadeira - descarregarCadeira < 0 ||
     qtdLuminaria - descarregarLuminaria < 0 ||
-    qtdLavadora - descarregarLavadora < 0
-  ) {
+    qtdLavadora - descarregarLavadora < 0 ) {
+
+    //Modal descarga em excesso
     document.getElementById("modalTitulo").innerHTML = "Erro: Carga";
     document.getElementById("modalHeader").className = "modal-header text-danger";
     document.getElementById("modalBody").innerHTML = "Não é permitido descarregar mais do que a carga inicial";
     document.getElementById("modalButton").className = "btn btn-danger";
 
     $("#modalRegistro").modal("show");
-  } else {}
-
-  if (transporte.validarDados()) {
+  } else {
+    if (transporte.validarDados()) {
     bd.gravar(transporte);
 
+    //Modal cadastro sucesso
     document.getElementById("modalTitulo").innerHTML = "Viajem cadastrada!";
     document.getElementById("modalHeader").className = "modal-header text-success";
     document.getElementById("modalBody").innerHTML = `${transporte.toString()}`;
     document.getElementById("modalButton").className = "btn btn-success";
     $("#modalRegistro2").modal("show");
 
+    console.log(transporte);
+
   }else{
 
-    document.getElementById("modalTitulo").innerHTML = "Erro: Dados inválidos";
-    document.getElementById("modalHeader").className = "modal-header text-danger";
-    document.getElementById("modalBody").innerHTML = "Campos de dados não preenchidos";
-    document.getElementById("modalButton").className = "btn btn-danger";
-    $("#modalRegistro").modal("show");
+      //Modal campos faltando
+      document.getElementById("modalTitulo").innerHTML = "Erro: Dados inválidos";
+      document.getElementById("modalHeader").className = "modal-header text-danger";
+      document.getElementById("modalBody").innerHTML = "Campos de dados não preenchidos";
+      document.getElementById("modalButton").className = "btn btn-danger";
+      $("#modalRegistro").modal("show");
+    }
   }
 
-  console.log(transporte);
+  
+
+  
 }
 
 export function limpaBancoDados(){
+  document.getElementById("modalTitulo").innerHTML = "Banco de dados limpo";
+  document.getElementById("modalHeader").className = "modal-header text-warning";
+  document.getElementById("modalBody").innerHTML = "Obrigado por utilizar a aplicação!";
+  document.getElementById("modalButton").className = "btn btn-warning";
+  $("#modalRegistro2").modal("show");
+
   localStorage.clear();
 }
 
-export function carregaListaTransportes(transportes = [], filtro = false) {
-  if (transportes.length === 0 && filtro === false) {
-    transportes = bd.recuperarTodosRegistros();
-  }
+export function carregaListaTransportes(transportes = []) {
+  console.log(bd.recuperarTodosRegistros())
+  
 
   let listaTransportes = document.getElementById("listaTransportes");
-  //listaTransportes.innerHTML = "";
+  listaTransportes.innerHTML = "";
 
   transportes.forEach(function (d) {
     let linha = listaTransportes.insertRow();
 
-    linha.insertCell(0).innerHTML = `${d.dia}`;
-    linha.insertCell(1).innerHTML = d.tipo;
+    linha.insertCell(0).innerHTML = `${d.id}`;
+    linha.insertCell(1).innerHTML = d.cidade1;
 
     let btn = document.createElement("button");
     btn.className = "btn btn-danger";
@@ -370,8 +381,11 @@ export function carregaListaTransportes(transportes = [], filtro = false) {
       window.location.reload();
     };
 
-    linha.insertCell(2).innerHTML = d.descricao;
-    linha.insertCell(3).innerHTML = d.valor;
-    linha.insertCell(4).append(btn);
+    linha.insertCell(2).innerHTML = d.cidade2;
+    linha.insertCell(3).innerHTML = d.cidade3;
+    linha.insertCell(4).innerHTML = d.cargaTotal;
+    linha.insertCell(5).innerHTML = d.quantDescarregar;
+    linha.insertCell(6).innerHTML = d.precoViajem;
+    linha.insertCell(7).append(btn);
   });
 }

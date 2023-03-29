@@ -263,10 +263,6 @@ function Transporte() {
               </tbody>
             </table>
           </div>
-
-          {/* Exibir resultado */}
-
-          
         </div>
 
 
@@ -278,12 +274,13 @@ function Transporte() {
 
         <div className="row">
           <div className="col-md-4">
-            <button type="button" className="btn btn-success mb-5" onClick={carregaListaTransportes()}>
+            <button type="button" className="btn btn-success mb-5" onClick={() => {carregaListaTransportes()}}>
               Exibir dados estatísticos
             </button>
           </div>
         </div>
 
+        {/* Exibir resultado */}
         <div className="row">
             <div className="col">
               <table className="table">
@@ -308,11 +305,13 @@ function Transporte() {
           <div className="col mb-3">
             <h2 className="display-5">Limpar banco de dados</h2>
           </div>
+          
         </div>
+       
 
         <div className="row">
           <div className="col-md-4 mb-5">
-            <button type="button" className="btn btn-danger" onClick={limpaBancoDados()}>
+            <button type="button" className="btn btn-danger" onClick={() => {limpaBancoDados()}}>
               Limpar histórico
             </button>
           </div>

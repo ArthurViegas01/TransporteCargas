@@ -48,9 +48,9 @@ function Home() {
 
       <Carousel/>
 
-      <div className="container">
+      <div className="container mt-5">
         <div className="row">
-          <div className="col mb-3">
+          <div className="col mb-3 mt-5">
             <h1 className="display-4 titulo">
               Sistema de transporte de cargas
             </h1>

@@ -6,8 +6,8 @@ import "./carousel.css";
 
 export const Carousel = () => {
   return (
-    <div className="divTesteNave">
-        <div className="justify-content-center">
+    <div className="caixa">
+        <div className="justify-content-center divTesteNave">
           <div id="carouselExampleIndicators" className="carousel slide" data-ride="false" data-interval="false">
             <ol className="carousel-indicators">
               <li data-target="#carouselExampleIndicators" data-slide-to="0" className="active"></li>
@@ -16,7 +16,7 @@ export const Carousel = () => {
             </ol>
             <div className="carousel-inner">
               <div className="carousel-item active">
-                <img src={Caminhao3} className="" alt="..."></img>
+                <img src={Caminhao3} className="greyOpacity" alt="..."></img>
                 <div className="container">
                   <div className="carousel-caption text-left">
                     <h1>Dely.</h1>
@@ -29,7 +29,7 @@ export const Carousel = () => {
                 <div className="container">
                   <div className="carousel-caption text-start">
                     <h1>Alcance</h1>
-                    <p>Serviços de entrega com disponibilidade para todos os estados do Brasil</p>
+                    <p>Serviços de entrega saindo de todos os estados do Brasil</p>
                   </div>
                 </div>
               </div>
