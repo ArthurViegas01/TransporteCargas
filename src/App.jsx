@@ -353,7 +353,7 @@ function App() {
         <div className="modal-dialog" role="document">
           <div className="modal-content">
             <div id="modalHeader">
-              <h5 className="modal-title" id="modalTitulo"></h5>
+              <h5 className="modal-title" id="modalTitulo">teste</h5>
               <button
                 type="button"
                 className="close"
