@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Tabela, procuraTrecho, cadastraTransporte } from "../../Sistema";
+import { Tabela, procuraTrecho} from "../../Sistema";
 import DataGrid from "../../components/DataGrid";
-import Tables from "../../components/Tables";
 import Carousel from "../../components/Carousel";
 import Navbar from "../../components/Navbar";
 import "../../../src/App.css";
@@ -67,8 +66,7 @@ function Home() {
         <h5>Distância entre cidades</h5>
         <DataGrid csv={arquivoCSV} />
 
-        {/* Tabela de pesos dos itens | custo x kilometro */}
-        <Tables />
+
 
         <div className="row">
           <div className="col mb-3">
@@ -110,208 +108,11 @@ function Home() {
         </div>
 
         {/* Cadastrar Transporte */}
-        <div className="row">
-          <div className="col mb-3">
-            <h2 className="display-5">Cadastrar transporte</h2>
-          </div>
-        </div>
 
-        <div className="row">
-          {/* Itens iniciais */}
-          <div className="col mb-3">
-            <h6>Itens a serem transportados</h6>
-            <table className="table table-bordered">
-              <thead>
-                <tr>
-                  <th>Itens</th>
-                  <th>Quantidade (unidades)</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Celular</td>
-                  <td>
-                    <input
-                      type="text"
-                      className="form-control ocupando"
-                      id="qtdCelular"
-                      pattern="[0-9]*"
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td>Geladeira</td>
-                  <td>
-                    <input
-                      type="text"
-                      className="form-control ocupando"
-                      id="qtdGeladeira"
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td>Freezer</td>
-                  <td>
-                    <input
-                      type="text"
-                      className="form-control ocupando"
-                      id="qtdFreezer"
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td>Cadeira</td>
-                  <td>
-                    <input
-                      type="text"
-                      className="form-control ocupando"
-                      id="qtdCadeira"
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td>Luminária</td>
-                  <td>
-                    <input
-                      type="text"
-                      className="form-control ocupando"
-                      id="qtdLuminaria"
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td>Lavadora de roupas</td>
-                  <td>
-                    <input
-                      type="text"
-                      className="form-control ocupando"
-                      id="qtdLavadora"
-                    />
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
 
-          {/* Trajeto da entrega */}
-          <div className="col mt-4">
-            <div className="mt-6"></div>
-            <input type="text" className="form-control" placeholder="Partida" id="parada1"/>
-            <input type="text" className="form-control mt-5 mb-5" placeholder="Parada" id="parada2"/>
-            <input type="text" className="form-control mt-5" placeholder="Destino" id="parada3"/>
 
-            <div>
-              <button
-                type="button"
-                className="mt-5 btn btn-dark"
-                onClick={() =>
-                  cadastraTransporte(
-                    document.getElementById("qtdCelular").value,
-                    document.getElementById("qtdGeladeira").value,
-                    document.getElementById("qtdFreezer").value,
-                    document.getElementById("qtdCadeira").value,
-                    document.getElementById("qtdLuminaria").value,
-                    document.getElementById("qtdLavadora").value,
-                    document.getElementById("parada1").value,
-                    document.getElementById("parada2").value,
-                    document.getElementById("parada3").value,
-                    document.getElementById("descarregarCelular").value,
-                    document.getElementById("descarregarGeladeira").value,
-                    document.getElementById("descarregarFreezer").value,
-                    document.getElementById("descarregarCadeira").value,
-                    document.getElementById("descarregarLuminaria").value,
-                    document.getElementById("descarregarLavadora").value,
-                    tabela
-                  )
-                }
-              >
-                Fazer entrega
-              </button>
-            </div>
-          </div>
 
-          {/* Intes para descarregar */}
-          <div className="col mb-3">
-            <h6>Descarregar na parada</h6>
-            <table className="table table-bordered">
-              <thead>
-                <tr>
-                  <th>Itens</th>
-                  <th>Quantidade (unidades)</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Celular</td>
-                  <td>
-                    <input type="text" className="form-control ocupando" id="descarregarCelular"/>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Geladeira</td>
-                  <td>
-                    <input type="text" className="form-control ocupando" id="descarregarGeladeira"/>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Freezer</td>
-                  <td>
-                    <input type="text" className="form-control ocupando" id="descarregarFreezer"/>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Cadeira</td>
-                  <td>
-                    <input type="text" className="form-control ocupando" id="descarregarCadeira"/>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Luminária</td>
-                  <td>
-                    <input type="text" className="form-control ocupando" id="descarregarLuminaria"/>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Lavadora de roupas</td>
-                  <td>
-                    <input type="text" className="form-control ocupando" id="descarregarLavadora"/>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          {/* Exibir resultado */}
-          <div className="col mb-3"></div>
-        </div>
-
-        <div className="row">
-          <div className="col mb-3">
-            <h2 className="display-5">Dados estatísticos</h2>
-          </div>
-        </div>
-
-        <div className="row">
-          <div className="col-md-4">
-            <button type="button" className="btn btn-success mb-5">
-              Exibir dados estatísticos
-            </button>
-          </div>
-        </div>
-
-        <div className="row">
-          <div className="col mb-3">
-            <h2 className="display-5">Finalizar programa</h2>
-          </div>
-        </div>
-
-        <div className="row">
-          <div className="col-md-4 mb-5">
-            <button type="button" className="btn btn-danger">
-              Limpar histórico
-            </button>
-          </div>
-        </div>
+        
       </div>
       {/* Div container */}
 
